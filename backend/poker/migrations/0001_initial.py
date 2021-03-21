@@ -15,39 +15,88 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='FriendGroup',
+            name="FriendGroup",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_created', models.DateField(auto_created=True)),
-                ('name', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_created", models.DateField(auto_created=True)),
+                ("name", models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
-            name='Player',
+            name="Player",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('friends', models.ManyToManyField(related_name='_player_friends_+', to='poker.Player')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "friends",
+                    models.ManyToManyField(
+                        related_name="_player_friends_+", to="poker.Player"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Game',
+            name="Game",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('time_created', models.DateTimeField(auto_created=True)),
-                ('name', models.CharField(max_length=6)),
-                ('friend_group', models.ForeignKey(default=None, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='games', to='poker.friendgroup')),
-                ('players', models.ManyToManyField(to='poker.Player')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("time_created", models.DateTimeField(auto_created=True)),
+                ("name", models.CharField(max_length=6)),
+                (
+                    "friend_group",
+                    models.ForeignKey(
+                        default=None,
+                        on_delete=django.db.models.deletion.SET_DEFAULT,
+                        related_name="games",
+                        to="poker.friendgroup",
+                    ),
+                ),
+                ("players", models.ManyToManyField(to="poker.Player")),
             ],
         ),
         migrations.AddField(
-            model_name='friendgroup',
-            name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='groups_owned', to='poker.player'),
+            model_name="friendgroup",
+            name="owner",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="groups_owned",
+                to="poker.player",
+            ),
         ),
         migrations.AddField(
-            model_name='friendgroup',
-            name='players',
-            field=models.ManyToManyField(related_name='friend_groups', to='poker.Player'),
+            model_name="friendgroup",
+            name="players",
+            field=models.ManyToManyField(
+                related_name="friend_groups", to="poker.Player"
+            ),
         ),
     ]
