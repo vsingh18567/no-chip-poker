@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Game from './App'
-const myfirstelement = <h1>Hello React!</h1>
+
+import Home from "./components/Home";
 
 ReactDOM.render(
-  <Game />,
+    <Home user=""/>,
   document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function

@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
                 (
                     "friends",
                     models.ManyToManyField(
-                        related_name="_player_friends_+", to="poker.Player"
+                        related_name="_player_friends_+", to="pokerapi.Player"
                     ),
                 ),
                 (
@@ -77,10 +77,10 @@ class Migration(migrations.Migration):
                         default=None,
                         on_delete=django.db.models.deletion.SET_DEFAULT,
                         related_name="games",
-                        to="poker.friendgroup",
+                        to="pokerapi.friendgroup",
                     ),
                 ),
-                ("players", models.ManyToManyField(to="poker.Player")),
+                ("players", models.ManyToManyField(to="pokerapi.Player")),
             ],
         ),
         migrations.AddField(
@@ -89,14 +89,14 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="groups_owned",
-                to="poker.player",
+                to="pokerapi.player",
             ),
         ),
         migrations.AddField(
             model_name="friendgroup",
             name="players",
             field=models.ManyToManyField(
-                related_name="friend_groups", to="poker.Player"
+                related_name="friend_groups", to="pokerapi.Player"
             ),
         ),
     ]
