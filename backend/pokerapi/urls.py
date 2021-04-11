@@ -1,12 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-from .views import GameViewSet
+from .views import games_list, games_detail
 
-router = routers.DefaultRouter()
-router.register(r'games', GameViewSet)
+
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include(router.urls))
-]
+	path("admin/", admin.site.urls),
+	path("games/", games_list),
+	path("games/<name>", games_detail)
+	]

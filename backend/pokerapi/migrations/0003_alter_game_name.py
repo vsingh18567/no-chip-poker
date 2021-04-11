@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pokerapi', '0002_auto_20210410_0002'),
+        ("pokerapi", "0002_auto_20210410_0002"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='game',
-            name='name',
+            model_name="game",
+            name="name",
             field=models.CharField(max_length=7, unique=True),
         ),
     ]

@@ -1,22 +1,22 @@
 from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 
 from .models import Game
 from .serializers import GameSerializer
 from .utils import generate_name
 
-class GameViewSet(viewsets.ModelViewSet):
-	queryset = Game.objects.all()
-	serializer_class = GameSerializer
+@api_view(["GET"])
+def games_list(request):
+    games = Game.objects.all()
+    return Response(GameSerializer(games, many=True).data, status=200)
 
-	@action(methods=['post'], detail=False, url_name="create", url_path="create")
-	def create_game(self, request):
-		print("hi")
-		name = generate_name()
-		g = Game(
-			name=name
-		)
-		g.save()
-		return Response({"status": f"Game {name} created"})
+@api_view(["GET"])
+def games_detail(request, name):
+    try:
+        game = Game.objects.get(name=name)
+        return Response(GameSerializer(game).data, status=200)
+    except:
+        return Response({"status": f"game with name {name} not found"}, status=400)
+
 
