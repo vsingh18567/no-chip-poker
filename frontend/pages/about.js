@@ -1,65 +1,57 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, {useState} from 'react'
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+function HomePage() {
+    const [user, setUser] = useState("");
+    const [isLoggedIn, setLoggedIn] = useState(user !== "");
+    const background_color = "#121212";
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+    const getNavBarText = () => {
+        if (isLoggedIn) {
+            return ["Profile", "Logout"];
+        } else {
+            return ["Login", "Register"];
+        }
+    }
 
-        <p className={styles.description}>
-          Get started by yeeeet{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+    return (
+        <div id="header">
+            <nav className="navbar">
+                <div className="container">
+                    <div id="navMenu" className="navbar-menu">
+                        <div className="navbar-start">
+                            <a className="navbar-item">
+                                Home
+                            </a>
+                            <a className="navbar-item">
+                                About
+                            </a>
+                        </div>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+                        <div className="navbar-end">
+                            <div className="navbar-item">
+                                <div className="buttons">
+                                    <a className="button is-dark">{getNavBarText()[0]}</a>
+                                    <a className="button is-link">{getNavBarText()[1]}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <section className="hero is-link is-fullheight-with-navbar">
+                <div className="hero-body has-text-centered">
+                    <div className="container">
+                        <p className="title" style={{fontSize: "4vw"}}>No Chip Poker</p>
+                        <p className="subtitle">Have a deck of cards, but no chips? This is the website for you!</p>
+                        <div className="hero box has-text-centered" style={{backgroundColor: "blue"}}>
+                            <button className="button is-one-fifth">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+    );
 }
+
+export default HomePage;
+

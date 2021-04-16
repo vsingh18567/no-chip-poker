@@ -15,5 +15,22 @@ a {
   box-sizing: border-box;
 }
 
+#cblack {
+  color: #0e0816
+}
+
+#cfuschia {
+  color: #a239ca
+}
+
+#cjewel {
+  color: #4717f6
+}
+
+#cstark {
+  color: #e7dfdd
+}
+
+
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css";
 
