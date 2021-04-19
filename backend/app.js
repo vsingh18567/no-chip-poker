@@ -1,6 +1,6 @@
 const http = require("http");
 const express = require("express");
-
+const message = require("../messages")
 const app = express();
 const server = http.createServer(app);
 
@@ -18,23 +18,29 @@ app.use(index);
 
 let interval;
 
-io.on("connection", (socket) => {
+io.on(message.PLAYER_CONNECT, (socket) => {
   console.log("New client connected");
   if (interval) {
     clearInterval(interval);
   }
   interval = setInterval(() => getApiAndEmit(socket), 1000);
-  socket.on("disconnect", () => {
+  socket.on(message.PLAYER_DISCONNECT, () => {
     console.log("Client disconnected");
     clearInterval(interval);
   });
+
+  socket.on(message.PLAYER_ADD, data => addPlayer(data));
+
+  socket.on("Hi", () => {
+    console.log("Hi");
+  })
 });
 
 const getApiAndEmit = socket => {
   const response = new Date();
   // Emitting a new message. Will be consumed by the client
   socket.emit("FromAPI", response);
-  console.log("message sent")
+  console.log("message sent");
 };
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
